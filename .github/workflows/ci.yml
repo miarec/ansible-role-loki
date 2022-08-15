@@ -25,6 +25,11 @@ jobs:
           yamllint_comment: false
           # yamllint_config_filepath: 'ansible/roles/loki/.yamlint'
 
+      - name: Install test dependencies
+        run: |
+          pip3 install ansible-lint
+          ansible-lint
+
       # - name: Run ansible-lint
       #   uses: ansible/ansible-lint-action@main
         # with:
@@ -40,8 +45,8 @@ jobs:
         distro:
           - centos7
           - centos8
-          - ubuntu1804
           - ubuntu2004
+          - ubuntu2204
 
     steps:
       - name: Check out the Repository
