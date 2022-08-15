@@ -20,10 +20,8 @@ jobs:
       - name: Run yamllint
         uses: karancode/yamllint-github-action@master
         with:
-          # yamllint_file_or_dir: 'ansible/roles/loki'
           yamllint_strict: false
           yamllint_comment: false
-          # yamllint_config_filepath: 'ansible/roles/loki/.yamlint'
 
       # - name: Install test dependencies
       #   run: |
@@ -31,8 +29,8 @@ jobs:
       #     cd miarec.loki
       #     ansible-lint
 
-      # - name: Run ansible-lint
-      #   uses: ansible/ansible-lint-action@main
+      - name: Run ansible-lint
+        uses: ansible/ansible-lint-action@main
         # with:
         #   override-deps: ansible-lint==5.3.2
         #   # https://github.com/ansible-community/ansible-lint/issues/1795
@@ -52,8 +50,6 @@ jobs:
     steps:
       - name: Check out the Repository
         uses: actions/checkout@v2
-        # with:
-        #   path: 'miarec.loki'
 
       - name: Set up Python3
         uses: actions/setup-python@v2
