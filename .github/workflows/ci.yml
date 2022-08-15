@@ -25,8 +25,8 @@ jobs:
           yamllint_comment: false
           # yamllint_config_filepath: 'ansible/roles/loki/.yamlint'
 
-      - name: Run ansible-lint
-        uses: ansible/ansible-lint-action@main
+      # - name: Run ansible-lint
+      #   uses: ansible/ansible-lint-action@main
         # with:
         #   override-deps: ansible-lint==5.3.2
         #   # https://github.com/ansible-community/ansible-lint/issues/1795
