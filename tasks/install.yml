@@ -40,7 +40,7 @@
 - name: Download loki binary
   become: false
   get_url:
-    url: "https://github.com/grafana/loki/releases/download/v{{ loki_version }}/loki-linux-{{ go_arch }}.zip"
+    url: "{{ base_download_url }}{{ versioned_download_url }}"
     dest: "/tmp"
   register: _download_binary
   until: _download_binary is succeeded

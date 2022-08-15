@@ -6,10 +6,13 @@ go_arch_map:
   armv7l: 'armv6'
   armv6l: 'armv6'
 
-go_arch: "{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
+go_arch: "{{ go_arch_map[ansible_architecture]|default(ansible_architecture) }}"
 
 loki_dependencies:
   - unzip
 
 loki_system_group: "loki"
 loki_system_user: "loki"
+
+base_download_url: "https://github.com/grafana/loki/releases/download/v"
+versioned_download_url: "{{ loki_version }}/loki-linux-{{ go_arch }}.zip"
