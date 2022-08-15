@@ -28,6 +28,6 @@
         - prereqs
 
   roles:
-    - role: loki
+    - role: miarec.loki
       tags:
         - loki
