@@ -1,0 +1,33 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+
+  pre_tasks:
+    - name: Install prerequisites
+      block:
+        - name: Update apt cache
+          apt:
+            update_cache: true
+            cache_valid_time: 600
+          changed_when: false
+          when: ansible_os_family == "Debian"
+
+        - name: Install packages Debian
+          apt:
+            name: unzip
+            state: present
+          when: ansible_os_family == "Debian"
+
+        - name: Install packages RedHat
+          yum:
+            name: unzip
+            state: present
+          when: ansible_os_family == "RedHat"
+      tags:
+        - prereqs
+
+  roles:
+    - role: loki
+      tags:
+        - loki

@@ -1,0 +1,33 @@
+---
+- name: Fail on unsupported init systems
+  fail:
+    msg: "This module only works with systemd"
+  when: ansible_service_mgr != 'systemd'
+
+- name: Get systemd version
+  command: systemctl --version
+  changed_when: false
+  check_mode: false
+  register: __systemd_version
+  tags:
+    - skip_ansible_lint
+
+- block:
+    - name: Get latest release
+      uri:
+        url: "https://api.github.com/repos/grafana/loki/releases/latest"
+        method: GET
+        return_content: true
+        status_code: 200
+        body_format: json
+        validate_certs: false
+        user: "{{ lookup('env', 'GH_USER') | default(omit) }}"
+        password: "{{ lookup('env', 'GH_TOKEN') | default(omit) }}"
+      no_log: false
+      register: _latest_release
+      until: _latest_release.status == 200
+      retries: 5
+
+    - name: "Set loki version to {{ _latest_release.json.tag_name[1:] }}"
+      set_fact:
+        loki_version: "{{ _latest_release.json.tag_name[1:] }}"

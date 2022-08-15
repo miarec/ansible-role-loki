@@ -1,0 +1,21 @@
+---
+galaxy_info:
+  author: miarec
+  description: Deploy loki Server
+  role_name: loki
+  license: MIT
+  company: MiaRec, Inc.
+  min_ansible_version: 2.7
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+        - xenial
+    - name: EL
+      versions:
+        - 7
+        - 8
+  galaxy_tags:
+    - monitoring
+
+dependencies: []

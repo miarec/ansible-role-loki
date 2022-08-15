@@ -1,0 +1,36 @@
+---
+- import_tasks: preflight.yml
+  tags:
+    - loki_install
+    - loki_configure
+    - loki_run
+
+- import_tasks: install.yml
+  become: true
+  tags:
+    - loki_install
+
+- import_tasks: configure.yml
+  become: true
+  tags:
+    - loki_configure
+
+- name: Ensure loki is enabled on boot
+  become: true
+  systemd:
+    daemon_reload: true
+    name: loki
+    enabled: true
+  tags:
+    - loki_run
+
+- name: Force all handlers to run
+  meta: flush_handlers
+
+- name: Ensure loki service is running
+  service:
+    name: loki
+    state: started
+  become: true
+  tags:
+    - loki_run

@@ -1,0 +1,17 @@
+---
+- name: Create loki systemd service file
+  template:
+    src: loki.service.j2
+    dest: /etc/systemd/system/loki.service
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart loki
+
+- name: Create/Update configuration file
+  template:
+    src: loki-config.yml.j2
+    dest: "{{ loki_config_dir }}/{{ loki_config_file }}"
+    owner: root
+    mode: 0644
+  notify: restart loki

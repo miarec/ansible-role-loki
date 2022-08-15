@@ -1,0 +1,26 @@
+auth_enabled: false
+server:
+  http_listen_port: {{ loki_http_listen_port }}
+  grpc_listen_port: {{ loki_grpc_listen_port }}
+common:
+  path_prefix: {{ loki_local_storage_dir }}
+  storage:
+    filesystem:
+      chunks_directory: {{ loki_local_storage_dir }}/chunks
+      rules_directory: {{ loki_local_storage_dir }}/rules
+  replication_factor: 1
+  ring:
+    instance_addr: 127.0.0.1
+    kvstore:
+      store: inmemory
+schema_config:
+  configs:
+    - from: 2020-10-24
+      store: boltdb-shipper
+      object_store: filesystem
+      schema: v11
+      index:
+        prefix: index_
+        period: 24h
+ruler:
+  alertmanager_url: 'http://localhost:9093'

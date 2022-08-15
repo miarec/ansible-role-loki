@@ -1,0 +1,15 @@
+---
+go_arch_map:
+  i386: '386'
+  x86_64: 'amd64'
+  aarch64: 'arm64'
+  armv7l: 'armv6'
+  armv6l: 'armv6'
+
+go_arch: "{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
+
+loki_dependencies:
+  - unzip
+
+loki_system_group: "loki"
+loki_system_user: "loki"

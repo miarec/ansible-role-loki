@@ -1,0 +1,16 @@
+[Unit]
+Description=Loki Log Aggregator
+Documentation=https://github.com/grafana/loki
+After=network.target
+
+[Service]
+Type=simple
+ExecStart={{ loki_bin_dir }}/{{ loki_bin }} -config.file {{ loki_config_dir }}/{{ loki_config_file }}
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+Environment=SYSTEMD_LOG_LEVEL=debug
+
+[Install]
+WantedBy=multi-user.target
