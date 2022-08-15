@@ -14,8 +14,8 @@ jobs:
     steps:
       - name: Check out the repository
         uses: actions/checkout@v2
-        # with:
-        #   path: 'miarec.loki'
+        with:
+          path: 'miarec.loki'
 
       - name: Run yamllint
         uses: karancode/yamllint-github-action@master
@@ -28,7 +28,7 @@ jobs:
       - name: Install test dependencies
         run: |
           pip3 install ansible-lint
-          ansible-lint
+          ansible-lint -c miarec.loki/.ansible-lint
 
       # - name: Run ansible-lint
       #   uses: ansible/ansible-lint-action@main
