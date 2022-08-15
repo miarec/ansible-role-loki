@@ -12,28 +12,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out the repository
+      - name: Check out the repository.
         uses: actions/checkout@v2
-        # with:
-        #   path: 'miarec.loki'
 
-      - name: Run yamllint
+      - name: Run yamllint.
         uses: karancode/yamllint-github-action@master
         with:
           yamllint_strict: false
           yamllint_comment: false
-
-      # - name: Install test dependencies
-      #   run: |
-      #     pip3 install ansible-lint
-      #     cd miarec.loki
-      #     ansible-lint
-
-      - name: Run ansible-lint
-        uses: ansible/ansible-lint-action@main
-        # with:
-        #   override-deps: ansible-lint==5.3.2
-        #   # https://github.com/ansible-community/ansible-lint/issues/1795
 
   test:
     name: molecule
