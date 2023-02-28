@@ -1,7 +1,47 @@
 auth_enabled: false
 server:
-  http_listen_port: {{ loki_http_listen_port }}
-  grpc_listen_port: {{ loki_grpc_listen_port }}
+  http_listen_port: ${http_port}
+  grpc_listen_port: ${grpc_port}
+{% if loki_s3_storage == true %}
+ingester:
+  chunk_idle_period: 3m
+  chunk_block_size: 262144
+  chunk_retain_period: 1m
+  max_transfer_retries: 0
+  lifecycler:
+    ring:
+      kvstore:
+        store: inmemory
+      replication_factor: 1
+limits_config:
+  enforce_metric_name: false
+  reject_old_samples: true
+  reject_old_samples_max_age: 168h
+compactor:
+  working_directory: /loki/boltdb-shipper-compactor
+  shared_store: aws
+schema_config:
+  configs:
+  - from: 2020-07-01
+    store: boltdb-shipper
+    object_store: aws
+    schema: v11
+    index:
+      prefix: loki_index_
+      period: 24h
+storage_config:
+  aws:
+    s3: s3://${loki_s3_region}/${loki_s3_bucket}
+  boltdb_shipper:
+    active_index_directory: /loki/index
+    shared_store: s3
+    cache_location: /loki/boltdb-cache
+chunk_store_config:
+  max_look_back_period: 0s
+table_manager:
+  retention_deletes_enabled: false
+  retention_period: 0s'
+{% else %}
 common:
   path_prefix: {{ loki_local_storage_dir }}
   storage:
@@ -24,3 +64,4 @@ schema_config:
         period: 24h
 ruler:
   alertmanager_url: 'http://localhost:9093'
+{% endif %}

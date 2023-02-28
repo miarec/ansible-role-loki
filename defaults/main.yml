@@ -5,4 +5,11 @@ loki_config_dir: "/etc/loki"
 loki_config_file: "loki-config.yml"
 loki_bin_dir: "/usr/local/bin"
 loki_bin: "loki"
+
+# local storage
 loki_local_storage_dir: "etc/loki"
+
+# S3 storage Settings
+loki_s3_storage: false
+loki_s3_region:
+loki_s3_bucket:

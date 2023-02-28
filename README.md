@@ -14,6 +14,13 @@ This ansible role will install the Grafana Loki Logging Engine locally detailed 
     - started
     - enabled
 
+## Role Variables
+
+- `loki_s3_storage` if true, loki will be configured to store data in AWS S3 bucket
+- `loki_s3_region` region of s3 bucket
+- `loki_s3_bucket` name of s3 bucket used for storage
+
+
 ## Example Playbook
 
 ```yaml
