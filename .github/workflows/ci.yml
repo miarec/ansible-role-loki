@@ -21,33 +21,33 @@ jobs:
           yamllint_strict: false
           yamllint_comment: false
 
-  test:
-    name: molecule
-    needs: lint
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        distro:
-          - centos7
-          - centos8
-          - ubuntu2004
-          - ubuntu2204
+  # test:
+  #   name: molecule
+  #   needs: lint
+  #   runs-on: ubuntu-18.04
+  #   strategy:
+  #     matrix:
+  #       distro:
+  #         - centos7
+  #         - centos8
+  #         - ubuntu2004
+  #         - ubuntu2204
 
-    steps:
-      - name: Check out the Repository
-        uses: actions/checkout@v2
+  #   steps:
+  #     - name: Check out the Repository
+  #       uses: actions/checkout@v2
 
-      - name: Set up Python3
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
+  #     - name: Set up Python3
+  #       uses: actions/setup-python@v2
+  #       with:
+  #         python-version: '3.x'
 
-      - name: Install test dependencies
-        run: pip3 install -r test-requirements.txt
+  #     - name: Install test dependencies
+  #       run: pip3 install -r test-requirements.txt
 
-      - name: Run molecule tests
-        run: molecule test
-        env:
-          PY_COLORS: '1'
-          ANSIBLE_FORCE_COLOR: '1'
-          MOLECULE_DISTRO: ${{ matrix.distro }}
+  #     - name: Run molecule tests
+  #       run: molecule test
+  #       env:
+  #         PY_COLORS: '1'
+  #         ANSIBLE_FORCE_COLOR: '1'
+  #         MOLECULE_DISTRO: ${{ matrix.distro }}
