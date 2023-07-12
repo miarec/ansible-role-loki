@@ -1,4 +1,0 @@
-ansible
-molecule[docker]
-docker
-pytest-testinfra>=1.7.0

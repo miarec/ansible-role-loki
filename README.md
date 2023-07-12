@@ -1,4 +1,7 @@
 # ansible role to install Grafana Loki
+![CI](https://github.com/miarec/ansible-role-loki/actions/workflows/ci.yml/badge.svg?event=push)
+
+
 This ansible role will install the Grafana Loki Logging Engine locally detailed [here](https://grafana.com/docs/loki/latest/installation/local/)
 
 ## Overview
