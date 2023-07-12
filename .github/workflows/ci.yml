@@ -23,7 +23,6 @@ jobs:
           yamllint_strict: false
           yamllint_comment: false
           yamllint_config_filepath: '.yamllint'
-          yamllint_comment: false
 
   test:
     name: molecule
